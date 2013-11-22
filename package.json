@@ -1,0 +1,25 @@
+{
+  "name": "poseidon-cassandra",
+  "version": "0.0.1",
+  "description": "A future wrapper around the node-cassandra-cql driver using Poseidon",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "poseidon",
+    "promise",
+    "Q",
+    "driver",
+    "cassandra",
+    "database",
+    "cql"
+  ],
+  "author": "Johny Jose",
+  "license": "MIT",
+  "dependencies": {
+    "q": "~0.9.7",
+    "node-cassandra-cql": "~0.3.0",
+    "poseidon": "0.0.4"
+  }
+}
