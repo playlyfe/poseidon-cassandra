@@ -1,6 +1,6 @@
 {
   "name": "poseidon-cassandra",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "description": "A future wrapper around the node-cassandra-cql driver using Poseidon",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,9 @@
   "keywords": [
     "poseidon",
     "promise",
-    "Q",
+    "performance",
+    "optimization",
+    "Bluebird",
     "driver",
     "cassandra",
     "database",
@@ -18,8 +20,10 @@
   "author": "Johny Jose",
   "license": "MIT",
   "dependencies": {
-    "q": "~0.9.7",
-    "node-cassandra-cql": "~0.3.0",
-    "poseidon": "0.0.4"
+    "poseidon": "0.2.0",
+    "node-cassandra-cql": "~0.4.2"
+  },
+  "devDependencies": {
+    "coffee-script": "~1.6.2"
   }
 }
