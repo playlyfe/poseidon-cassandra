@@ -3,9 +3,6 @@
   "version": "0.2.0",
   "description": "A future wrapper around the node-cassandra-cql driver using Poseidon",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [
     "poseidon",
     "promise",
@@ -19,6 +16,9 @@
   ],
   "author": "Johny Jose",
   "license": "MIT",
+  "scripts": {
+    "prepublish": "./node_modules/coffee-script/bin/coffee src/generator.coffee"
+  },
   "dependencies": {
     "poseidon": "0.2.0",
     "node-cassandra-cql": "~0.4.2"
