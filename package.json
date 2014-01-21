@@ -20,7 +20,7 @@
     "prepublish": "./node_modules/coffee-script/bin/coffee src/generator.coffee"
   },
   "dependencies": {
-    "poseidon": "0.2.0",
+    "poseidon": "0.2.1",
     "node-cassandra-cql": "~0.4.2"
   },
   "devDependencies": {
