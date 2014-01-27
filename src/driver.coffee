@@ -1,5 +1,5 @@
 Cassandra = require 'node-cassandra-cql'
-{Promise} = require 'poseidon'
+Promise = require 'bluebird'
 
 class Driver
 
