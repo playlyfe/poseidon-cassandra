@@ -1,5 +1,2 @@
-docs
-src-js
-src-cov
+lib
 node_modules
-report.html
