@@ -1,4 +1,4 @@
-Cassandra = require 'node-cassandra-cql'
+Cassandra = require 'cassandra-driver'
 Promise = require 'bluebird'
 
 class Driver
@@ -14,20 +14,18 @@ class Driver
   @openConnection: (connName, options = {}) ->
     return Promise.reject new Error('Connection not configured') unless Driver._configuration[connName]?
     if Driver._connections[connName]? then return Driver._connections[connName]
-    connection = (->
-      _connection = Promise.pending()
-      client = new Cassandra.Client Driver._configuration[connName]
-      client.connect (err) ->
-        if err?
-          _connection.reject err
-        else
-          _connection.resolve client
-      _connection.promise
-    )()
-    connection.then (client) ->
-      Driver._connections[connName] = connection
-    .catch (err) ->
-      Driver.openConnection(connName)
+
+    _connection = Promise.defer()
+    client = new Cassandra.Client Driver._configuration[connName]
+
+    client.connect (err) ->
+      if err?
+        _connection.reject err
+      else
+        _connection.resolve client
+
+    Driver._connections[connName] = _connection.promise
+
 
   @closeConnection: (connName) ->
     return Promise.reject new Error('Connection does not exist') unless Driver._connections[connName]?

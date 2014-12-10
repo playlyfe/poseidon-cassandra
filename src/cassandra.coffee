@@ -5,5 +5,5 @@ Promise = require 'bluebird'
 module.exports =
   Driver: Driver
   Keyspace: Keyspace
-  types: require('node-cassandra-cql').types
+  types: require('cassandra-driver').types
   Promise: Promise

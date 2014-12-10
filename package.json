@@ -20,8 +20,8 @@
     "prepublish": "./node_modules/coffee-script/bin/coffee src/generator.coffee"
   },
   "dependencies": {
-    "bluebird": "1.0.0",
-    "node-cassandra-cql": "0.4.2"
+    "bluebird": "2.3.11",
+    "cassandra-driver": "1.0.2"
   },
   "devDependencies": {
     "poseidon": "0.2.1",

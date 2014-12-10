@@ -13,10 +13,10 @@ module.exports = {
     },
     "type": "promise",
     "functions": {
+      "batch": {},
+      "eachRow": {},
       "execute": {},
-      "executeAsPrepared": {},
-      "streamRows": {},
-      "streamFields": {}
+      "stream": {},
     }
   }
 }
