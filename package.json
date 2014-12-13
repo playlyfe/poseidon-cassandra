@@ -24,7 +24,7 @@
     "cassandra-driver": "1.0.2"
   },
   "devDependencies": {
-    "poseidon": "0.2.1",
+    "poseidon": "0.3.0",
     "coffee-script": "~1.6.2"
   }
 }
