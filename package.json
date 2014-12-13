@@ -1,6 +1,6 @@
 {
   "name": "poseidon-cassandra",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "A future wrapper around the node-cassandra-cql driver using Poseidon",
   "main": "index.js",
   "keywords": [
