@@ -3,20 +3,22 @@ Promise = require 'bluebird'
 
 class Driver
 
-  @_configuration: {}
-  @_connections: {}
-
-  @configure: (connName, connConfig) ->
-    throw new Error('Configuration object required') unless connConfig?
-    Driver._configuration[connName] = connConfig
+  constructor: () ->
+    @_configuration = {}
+    @_connections = {}
     return
 
-  @openConnection: (connName, options = {}) ->
-    return Promise.reject new Error('Connection not configured') unless Driver._configuration[connName]?
-    if Driver._connections[connName]? then return Driver._connections[connName]
+  configure: (connName, connConfig) ->
+    throw new Error('Configuration object required') unless connConfig?
+    @_configuration[connName] = connConfig
+    return
+
+  openConnection: (connName, options = {}) ->
+    return Promise.reject new Error('Connection not configured') unless @_configuration[connName]?
+    if @_connections[connName]? then return @_connections[connName]
 
     _connection = Promise.defer()
-    client = new Cassandra.Client Driver._configuration[connName]
+    client = new Cassandra.Client @_configuration[connName]
 
     client.connect (err) ->
       if err?
@@ -24,31 +26,31 @@ class Driver
       else
         _connection.resolve client
 
-    Driver._connections[connName] = _connection.promise
+    @_connections[connName] = _connection.promise
 
 
-  @closeConnection: (connName) ->
-    return Promise.reject new Error('Connection does not exist') unless Driver._connections[connName]?
+  closeConnection: (connName) ->
+    return Promise.reject new Error('Connection does not exist') unless @_connections[connName]?
     _defer = Promise.pending()
-    Driver._connections[connName].then (client) ->
-      client.shutdown (err, result) ->
+    @_connections[connName].then (client) =>
+      client.shutdown (err, result) =>
         if err then return _defer.reject(err)
-        delete Driver._connections[connName]
+        delete @_connections[connName]
         _defer.resolve(result)
     _defer.promise
 
-  @reset: () ->
+  reset: () ->
     _connections = []
-    for connName, connConfig of Driver._configuration
-      if Driver._connections[connName]? then _connections.push(Driver.closeConnection(connName))
-      delete Driver._configuration[connName]
+    for connName, connConfig of @_configuration
+      if @_connections[connName]? then _connections.push(@closeConnection(connName))
+      delete @_configuration[connName]
     Promise.all(_connections)
 
-  @shutdown: () ->
+  shutdown: () ->
     _connections = []
-    for connName, connConfig of Driver._configuration
-      if Driver._connections[connName]? then _connections.push(Driver.closeConnection(connName))
-    Promise.all _connections
+    for connName, connConfig of @_configuration
+      if @_connections[connName]? then _connections.push(@closeConnection(connName))
+    Promise.all(_connections)
 
 module.exports = Driver
 

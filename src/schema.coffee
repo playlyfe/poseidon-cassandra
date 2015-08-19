@@ -4,7 +4,7 @@ module.exports = {
       "Driver": "./driver"
     },
     "constructor": {
-      "params": ["connectionName"],
+      "params": ["Driver", "connectionName"],
       "body": """
       this.connectionName = connectionName;
       this.instance = Driver.openConnection(connectionName);
